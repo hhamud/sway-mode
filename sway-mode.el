@@ -17,19 +17,12 @@
     (shell-command-to-string "forc fmt")))
 
 
-(defun sway-mode-activate-lsp ()
-  "Activates forc-lsp for lsp mode in Emacs."
+(defun sway-mode-test ()
+  "Run forc test."
   (interactive)
-  (with-eval-after-load 'lsp-mode
-    (add-to-list 'lsp-language-id-configuration
-                 '(sway-mode . "sway-mode"))
+  (let ((default-directory (expand-file-name "../")))
+    (shell-command-to-string "forc test")))
 
-    (lsp-register-client
-     (make-lsp-client :new-connection (lsp-stdio-connection "forc-lsp")
-                      :activation-fn (lsp-activate-on "sway-mode")
-                      :server-id 'forc-lsp)))
-  (lsp)
-  )
 
 (defvar function-call-highlights "\\(\\(?:\\w\\|\\s_\\)+\\)\\(<.+>\\)?\s*("
   "Regex for general Sway function calls.")
@@ -60,6 +53,7 @@
     (define-key keymap (kbd "C-c c") 'sway-mode-fmt)
     (define-key keymap (kbd "C-c a") 'sway-mode-fmt-custom)
     (define-key keymap (kbd "C-c r") 'sway-mode-activate-lsp)
+    (define-key keymap (kbd "C-c t") 'sway-mode-test)
     keymap)
   "Keymap for `sway-mode'.")
 
@@ -74,6 +68,16 @@
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.sw" . sway-mode))
+
+
+;;;###autoload
+(when (featurep 'lsp-mode)
+  (add-to-list 'lsp-language-id-configuration
+               '(sway-mode . "sway"))
+  (lsp-register-client
+   (make-lsp-client :major-modes '(sway-mode)
+                    :server-id 'forc-lsp
+                    :new-connection (lsp-stdio-connection "forc-lsp")))
 
 ;; add to feature list
 (provide 'sway-mode)
