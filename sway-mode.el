@@ -1,6 +1,21 @@
 ;;; sway-mode.el --- major mode for sway  -*- lexical-binding: t; -*-
+
+;; Version: 0.0.1
+;; Author: Hamza Hamud
+;; Url: https://github.com/hhamud/sway-mode
+;; Keywords: languages
+;; Package-Requires: ( (emacs "25.1")(lsp-mode "6.0"))
+
+;; This file is distributed under the terms of both the MIT license and the
+;; Apache License (version 2.0).
+
 ;;; commentary:
+
+;; This package implements a major-mode for editing Sway source code.
+
+
 ;;; code:
+
 (eval-when-compile
   (require 'rx))
 
@@ -52,7 +67,6 @@
   (let ((keymap (make-sparse-keymap)))
     (define-key keymap (kbd "C-c c") 'sway-mode-fmt)
     (define-key keymap (kbd "C-c a") 'sway-mode-fmt-custom)
-    (define-key keymap (kbd "C-c r") 'sway-mode-activate-lsp)
     (define-key keymap (kbd "C-c t") 'sway-mode-test)
     keymap)
   "Keymap for `sway-mode'.")
@@ -62,12 +76,7 @@
 (define-derived-mode sway-mode rust-mode
   "Sway"
   (font-lock-add-keywords nil sway-highlights)
-  (use-local-map sway-mode-map)
-
-  )
-
-;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.sw" . sway-mode))
+  (use-local-map sway-mode-map))
 
 
 ;;;###autoload
@@ -77,8 +86,11 @@
   (lsp-register-client
    (make-lsp-client :major-modes '(sway-mode)
                     :server-id 'forc-lsp
-                    :new-connection (lsp-stdio-connection "forc-lsp")))
+                    :new-connection (lsp-stdio-connection "forc-lsp"))))
 
-;; add to feature list
-(provide 'sway-mode)
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.sw\\'" . sway-mode))
+
+  ;; add to feature list
+  (provide 'sway-mode)
 ;;; sway-mode.el ends here
