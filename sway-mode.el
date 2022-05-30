@@ -4,7 +4,7 @@
 ;; Author: Hamza Hamud
 ;; Url: https://github.com/hhamud/sway-mode
 ;; Keywords: languages
-;; Package-Requires: ( (emacs "25.1")(lsp-mode "6.0"))
+;; Package-Requires: ((emacs "25.1")(lsp-mode "6.0"))
 
 ;; This file is distributed under the terms of both the MIT license and the
 ;; Apache License (version 2.0).
@@ -29,14 +29,14 @@
   "Formats a single sway file."
   (interactive)
   (let ((default-directory (expand-file-name "../")))
-    (shell-command-to-string "forc fmt")))
+    (shell-command "forc fmt")))
 
 
 (defun sway-mode-test ()
   "Run forc test."
   (interactive)
   (let ((default-directory (expand-file-name "../")))
-    (shell-command-to-string "forc test")))
+    (shell-command "forc test")))
 
 
 (defvar function-call-highlights "\\(\\(?:\\w\\|\\s_\\)+\\)\\(<.+>\\)?\s*("
@@ -91,6 +91,6 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.sw\\'" . sway-mode))
 
-  ;; add to feature list
-  (provide 'sway-mode)
+;; add to feature list
+(provide 'sway-mode)
 ;;; sway-mode.el ends here

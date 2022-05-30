@@ -18,6 +18,8 @@ Clone this repository locally and then add these to your init.el file
 (add-to-list 'auto-mode-alist '("\\.sw\\'" . sway-mode))
 ```
 
+if the above fails then just load in the manually and activate the mode within any `.sw` file
+
 
 ## Feature Guide
 
@@ -29,3 +31,7 @@ Clone this repository locally and then add these to your init.el file
 | C-c a       | sway-mode-fm-custom | an emacs function to format a specific sway file providing the forc toml path        |
 | C-c t       | sway-mode-test | an emacs function to activate forc test        |
 
+
+### LSP mode:
+
+Integration with forc-lsp requires that you have lsp-mode package installed and that you run lsp-mode with the major mode by running the command . ```M-x lsp-mode```
