@@ -30,6 +30,8 @@ if the above fails then just load in the manually and activate the mode within a
 | C-c c       | sway-mode-fmt     | an emacs function to format the present sway file         |
 | C-c a       | sway-mode-fm-custom | an emacs function to format a specific sway file providing the forc toml path        |
 | C-c t       | sway-mode-test | an emacs function to activate forc test        |
+| C-c b       | sway-mode-build | an emacs function to activate forc build        |
+| C-c d       | sway-mode-deploy | an emacs function to activate forc deploy        |
 
 
 ### LSP mode:
