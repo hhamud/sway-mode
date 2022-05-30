@@ -24,13 +24,11 @@
   (interactive "spath to toml file:")
   (shell-command "forc fmt --path %s" path))
 
-
 (defun sway-mode-fmt ()
   "Formats a single sway file."
   (interactive)
   (let ((default-directory (expand-file-name "../")))
     (shell-command "forc fmt")))
-
 
 (defun sway-mode-test ()
   "Run forc test."
@@ -38,15 +36,25 @@
   (let ((default-directory (expand-file-name "../")))
     (shell-command "forc test")))
 
+(defun sway-mode-build ()
+  "Build a forc project."
+  (interactive)
+  (let ((default-directory (expand-file-name "../")))
+    (shell-command "forc build")))
 
-(defvar function-call-highlights "\\(\\(?:\\w\\|\\s_\\)+\\)\\(<.+>\\)?\s*("
+(defun sway-mode-deploy ()
+  "Build a forc project."
+  (interactive)
+  (let ((default-directory (expand-file-name "../")))
+    (shell-command "forc deploy")))
+
+(defvar sway-function-call-highlights "\\(\\(?:\\w\\|\\s_\\)+\\)\\(<.+>\\)?\s*("
   "Regex for general Sway function calls.")
 
-(defvar function-call-type-highlights "\\b\\([A-Za-z][A-Za-z0-9_]*\\|_[A-Za-z0-9_]+\\)\\(::\\)\\(<.*>\s*\\)\("
+(defvar sway-function-call-type-highlights "\\b\\([A-Za-z][A-Za-z0-9_]*\\|_[A-Za-z0-9_]+\\)\\(::\\)\\(<.*>\s*\\)\("
   "Regex for Sway function calls with type.")
 
-
-(defvar declarations-without-name '("contract" "script" "predicate")
+(defvar sway-declarations-without-name '("contract" "script" "predicate")
   "Sway specific declarations.")
 
 (defvar sway-type-level-declaration  "\\b\\(abi\\|library\\)\\s-"
@@ -54,10 +62,10 @@
 
 (setq sway-highlights
       `(
-        (,(regexp-opt declarations-without-name 'symbols) . 'font-lock-keyword-face)
+        (,(regexp-opt sway-declarations-without-name 'symbols) . 'font-lock-keyword-face)
         (, sway-type-level-declaration . 'font-lock-keyword-face)
-        (,function-call-highlights . (1 'font-lock-function-name-face))
-        (,function-call-type-highlights . (1 'font-lock-function-name-face))
+        (,sway-function-call-highlights . (1 'font-lock-function-name-face))
+        (,sway-function-call-type-highlights . (1 'font-lock-function-name-face))
         ))
 
 
@@ -68,6 +76,8 @@
     (define-key keymap (kbd "C-c c") 'sway-mode-fmt)
     (define-key keymap (kbd "C-c a") 'sway-mode-fmt-custom)
     (define-key keymap (kbd "C-c t") 'sway-mode-test)
+    (define-key keymap (kbd "C-c b") 'sway-mode-build)
+    (define-key keymap (kbd "C-c d") 'sway-mode-deploy)
     keymap)
   "Keymap for `sway-mode'.")
 
