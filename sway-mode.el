@@ -93,10 +93,13 @@
 (when (featurep 'lsp-mode)
   (add-to-list 'lsp-language-id-configuration
                '(sway-mode . "sway"))
+  (lsp-dependency 'forc-lsp
+                  '(:system "forc-lsp"))
   (lsp-register-client
    (make-lsp-client :major-modes '(sway-mode)
                     :server-id 'forc-lsp
-                    :new-connection (lsp-stdio-connection "forc-lsp"))))
+                    :new-connection (lsp-stdio-connection
+                                     (lambda () `(,(lsp-package-path 'forc-lsp)))))))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.sw\\'" . sway-mode))
