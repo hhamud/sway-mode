@@ -1,0 +1,15 @@
+---
+name: CI
+on:
+  pull_request:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: purcell/setup-emacs@master
+      with:
+        version: 28.2
+    - uses: actions/checkout@v2
+    - name: Run tests
+      run: './run-tests.sh'
