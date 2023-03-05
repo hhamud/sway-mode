@@ -1,4 +1,4 @@
-;;; sway-mode.el --- major mode for sway  -*- lexical-binding: t; -*-
+;;; sway-mode.el --- Major mode for sway  -*- lexical-binding: t; -*-
 
 ;; Version: 0.0.1
 ;; Author: Hamza Hamud
@@ -60,24 +60,24 @@
 (defvar sway-type-level-declaration  "\\b\\(abi\\|library\\)\\s-"
   "Sway specific type level declaration.")
 
+(defvar sway-highlights)
 (setq sway-highlights
       `(
         (,(regexp-opt sway-declarations-without-name 'symbols) . 'font-lock-keyword-face)
         (, sway-type-level-declaration . 'font-lock-keyword-face)
         (,sway-function-call-highlights . (1 'font-lock-function-name-face))
-        (,sway-function-call-type-highlights . (1 'font-lock-function-name-face))
-        ))
+        (,sway-function-call-type-highlights . (1 'font-lock-function-name-face))))
 
 
 
 ;;; KeyMap
 (defvar sway-mode-map
   (let ((keymap (make-sparse-keymap)))
-    (define-key keymap (kbd "C-c c") 'sway-mode-fmt)
-    (define-key keymap (kbd "C-c a") 'sway-mode-fmt-custom)
-    (define-key keymap (kbd "C-c t") 'sway-mode-test)
-    (define-key keymap (kbd "C-c b") 'sway-mode-build)
-    (define-key keymap (kbd "C-c d") 'sway-mode-deploy)
+    (define-key keymap (kbd "C-c C-c") 'sway-mode-fmt)
+    (define-key keymap (kbd "C-c C-a") 'sway-mode-fmt-custom)
+    (define-key keymap (kbd "C-c C-t") 'sway-mode-test)
+    (define-key keymap (kbd "C-c C-b") 'sway-mode-build)
+    (define-key keymap (kbd "C-c C-d") 'sway-mode-deploy)
     keymap)
   "Keymap for `sway-mode'.")
 
