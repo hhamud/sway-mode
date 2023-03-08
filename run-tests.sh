@@ -19,8 +19,21 @@ INIT_PACKAGE_EL="(progn \
 "$EMACS" -Q -batch \
          --eval "$INIT_PACKAGE_EL"
 
+# lint
 "$EMACS" -Q -batch \
          --eval "$INIT_PACKAGE_EL" \
          -l package-lint.el \
          -f package-lint-batch-and-exit \
          sway-mode.el
+
+echo lint ok
+
+# build
+"$EMACS" -Q -batch \
+         --eval "$INIT_PACKAGE_EL" \
+         -l package-lint.el \
+         --eval "(setq byte-compile-error-on-warn nil)" \
+         -f batch-byte-compile \
+         sway-mode.el
+
+echo build ok
