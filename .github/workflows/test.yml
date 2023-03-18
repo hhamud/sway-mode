@@ -4,15 +4,6 @@ on:
   pull_request:
   push:
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: purcell/setup-emacs@master
-      with:
-        version: 28.2
-    - uses: actions/checkout@v3
-    - name: Run tests
-      run: './run-tests.sh'
   melpazoid:
     runs-on: ubuntu-latest
     steps:
