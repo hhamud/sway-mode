@@ -4,7 +4,8 @@
 ;; Author: Hamza Hamud
 ;; Url: https://github.com/hhamud/sway-mode
 ;; Keywords: languages
-;; Package-Requires: ((emacs "25.1")(lsp-mode "6.0"))
+;; Package-Requires: ((emacs "25.1")(lsp-mode "6.0")(rust-mode "1.0.5"))
+;; SPDX-License-Identifier: Apache-2.0
 
 ;; This file is distributed under the terms of both the MIT license and the
 ;; Apache License (version 2.0).
@@ -17,7 +18,9 @@
 ;;; code:
 
 (eval-when-compile
-  (require 'rx))
+  (require 'rx)
+  (require 'lsp-mode)
+  (require 'rust-mode))
 
 (defun sway-mode-fmt-custom (path)
   "Formats sway files within the supplied PATH."
@@ -61,7 +64,7 @@
   "Sway specific type level declaration.")
 
 (defvar sway-highlights)
-(setq sway-highlights
+(defvar sway-highlights
       `(
         (,(regexp-opt sway-declarations-without-name 'symbols) . 'font-lock-keyword-face)
         (, sway-type-level-declaration . 'font-lock-keyword-face)
