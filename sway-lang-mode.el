@@ -17,10 +17,11 @@
 
 ;;; code:
 
+(require 'lsp-mode)
+(require 'rust-mode)
+
 (eval-when-compile
-  (require 'rx)
-  (require 'lsp-mode)
-  (require 'rust-mode))
+  (require 'rx))
 
 (defun sway-lang-mode-fmt-custom (path)
   "Formats sway files within the supplied PATH."
