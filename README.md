@@ -1,6 +1,6 @@
 # Sway-mode
-
-
+[![MELPA](https://melpa.org/packages/sway-lang-mode-badge.svg)](https://melpa.org/#/sway-lang-mode)
+[![MELPA Stable](https://stable.melpa.org/packages/sway-lang-mode-badge.svg)](https://stable.melpa.org/#/sway-lang-mode)
 
 ## Introduction
 
